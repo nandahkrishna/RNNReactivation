@@ -1,0 +1,5 @@
+path: "results/${config}_${rnn.sigma2_rec}_${seed}"
+task:
+  biased: true
+rnn:
+  sigma2_rec: 0.0001

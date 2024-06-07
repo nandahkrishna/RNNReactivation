@@ -1,0 +1,4 @@
+task:
+  sequence_length: 50
+rnn:
+  dt: 1

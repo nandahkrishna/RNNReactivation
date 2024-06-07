@@ -1,0 +1,23 @@
+config: ???
+seed: ???
+path: "results/${config}_${seed}"
+rnn:
+  model: "vanilla"
+  n_in: 2
+  n_rec: 512
+  n_out: 512
+  n_init: 512
+  sigma2_in: 0
+  sigma2_rec: 0
+  sigma2_out: 0
+  dt: 0.2
+  tau: 1
+  bias: false
+  activation_fn: "relu"
+trainer:
+  n_epochs: 2500
+  lr: 0.001
+  weight_decay: 0
+  compute_all_metrics: true
+  test_freq: 100
+  save_freq: 100

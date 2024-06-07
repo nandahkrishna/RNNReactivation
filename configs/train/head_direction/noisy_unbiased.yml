@@ -1,0 +1,3 @@
+path: "results/${config}_${rnn.sigma2_rec}_${seed}"
+rnn:
+  sigma2_rec: 0.01

@@ -1,4 +1,4 @@
-# Offline reactivation in RNNs
+# Modeling Offline Reactivation or Replay in RNNs
 
 :globe_with_meridians: [OpenReview](https://openreview.net/forum?id=RVrINT6MT7)
 :page_facing_up: [PDF](https://openreview.net/pdf?id=RVrINT6MT7)
@@ -12,6 +12,70 @@ This repository contains code to reproduce experiments and figures from the pape
 During periods of quiescence, such as sleep, neural activity in many brain circuits resembles that observed during periods of task engagement. However, the precise conditions under which task-optimized networks can autonomously reactivate the same network states responsible for online behavior is poorly understood. In this study, we develop a mathematical framework that outlines sufficient conditions for the emergence of neural reactivation in circuits that encode features of smoothly varying stimuli. We demonstrate mathematically that noisy recurrent networks optimized to track environmental state variables using change-based sensory information naturally develop denoising dynamics, which, in the absence of input, cause the network to revisit state configurations observed during periods of online activity. We validate our findings using numerical experiments on two canonical neuroscience tasks: spatial position estimation based on self-motion cues, and head direction estimation based on angular velocity cues. Overall, our work provides theoretical support for modeling offline reactivation as an emergent consequence of task optimization in noisy neural circuits.
 
 **Keywords:** computational neuroscience, offline reactivation, replay, recurrent neural networks, path integration, noise
+
+## Setup
+
+Create a Python 3.10 virtual environment, and run the following command:
+```zsh
+pip install -r requirements.txt
+```
+
+## Experiments
+
+To train a model for a specific configuration, you must run `train.py` with the right options:
+```zsh
+python train.py config=CONFIG_NAME seed=SEED [...]
+```
+
+For example, to train a noisy vanilla RNN on the unbiased spatial navigation task, you may run:
+```zsh
+python train.py config=spatial_navigation/noisy_unbiased seed=0
+```
+
+You may change the seed and any other hyperparameters or configuration variables either in the `.yml` files in [`configs/train`](/configs/train/), or pass them as command-line arguments. For example:
+```zsh
+python train.py config=spatial_navigation/noisy_unbiased seed=2 rnn.sigma2_rec=0.0003 trainer.n_epochs=1000 task.place_cells_num=256
+```
+
+After training models with different configurations and seeds, you may run the analysis scripts. For example, for models trained with seed 0 you may run:
+```zsh
+python output_kl.py seed=0
+python output_variance.py seed=0
+python output_distance.py seed=0
+```
+
+You may then use the Jupyter Notebooks in [`notebooks`](/notebooks/) to visualize the results.
+
+### Reproducing Results
+
+> [!NOTE]
+> While it is possible to reproduce results from the paper overall, in practice the numbers and plots may not match _exactly_ due to differences in hardware, versions of CUDA, etc.
+
+To reproduce experiments from the paper, run the following commands:
+```zsh
+for seed in {0..4}; do
+    # Train vanilla RNNs on spatial navigation task
+    python train.py config=spatial_navigation/noisy_unbiased seed=$seed
+    python train.py config=spatial_navigation/noisy_biased seed=$seed
+    python train.py config=spatial_navigation/no-noise_unbiased seed=$seed
+    python train.py config=spatial_navigation/no-noise_biased seed=$seed
+
+    # Analyze vanilla RNNs trained on spatial navigation task
+    python output_kl.py seed=$seed
+    python output_variance.py seed=$seed
+    python output_distance.py seed=$seed
+
+    # Train GRUs on spatial navigation task
+    python train.py config=spatial_navigation/noisy_unbiased_gru seed=$seed
+    python train.py config=spatial_navigation/noisy_biased_gru seed=$seed
+
+    # Train vanilla RNNs on head direction task
+    python train.py config=head_direction/noisy_unbiased seed=$seed
+    python train.py config=head_direction/noisy_biased seed=$seed
+done
+```
+
+Plots may then be generated using [`notebooks/SpatialNavigation.ipynb`](/notebooks/SpatialNavigation.ipynb) and [`notebooks/HeadDirection.ipynb`](/notebooks/SpatialNavigation.ipynb).
 
 ## Citation
 
