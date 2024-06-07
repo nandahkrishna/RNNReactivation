@@ -37,7 +37,7 @@ You may change the seed and any other hyperparameters or configuration variables
 python train.py config=spatial_navigation/noisy_unbiased seed=2 rnn.sigma2_rec=0.0003 trainer.n_epochs=1000 task.place_cells_num=256
 ```
 
-After training models with different configurations and seeds, you may run the analysis scripts. For example, for models trained with seed 0 you may run:
+After training models with different configurations and seeds, you may run the analysis scripts. Default arguments for these scripts are specified in the `.yml` files in [`configs/analysis`](/configs/analysis/). You may edit these configuration files or override default values using command-line arguments. For example, for models trained with seed 0 you may run:
 ```zsh
 python output_kl.py seed=0
 python output_variance.py seed=0
@@ -76,6 +76,10 @@ done
 ```
 
 Plots may then be generated using [`notebooks/SpatialNavigation.ipynb`](/notebooks/SpatialNavigation.ipynb) and [`notebooks/HeadDirection.ipynb`](/notebooks/SpatialNavigation.ipynb).
+
+## License
+
+This codebase is licensed under the BSD 3-Clause License (SPDX: `BSD-3-Clause`). Refer to [`LICENSE.md`](/LICENSE.md) for details.
 
 ## Citation
 
