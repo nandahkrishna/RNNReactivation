@@ -29,8 +29,7 @@ for expt_config in expt_configs:
         print(f"Skipped: {expt_config}.")
         continue
 
-    model.device = args.device
-    model.to(args.device)
+    model.set_device(args.device)
     model.eval()
 
     task = model.task
@@ -70,7 +69,7 @@ random_net = rnn.RNN(
     activation_fn=model.activation_fn,
     device=args.device,
 )
-random_net.to(args.device)
+random_net.set_device(args.device)
 random_net.eval()
 
 test_data = random_net.task.get_test_batch()

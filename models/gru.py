@@ -56,6 +56,9 @@ class GRU(nn.Module):
     -------
     forward(x, init_state=None)
         Perform the forward pass through the GRU.
+
+    set_device(device='cuda')
+        Set the device to allocate tensors to.
     """
 
     def __init__(
@@ -201,3 +204,19 @@ class GRU(nn.Module):
             self.y_1t[:, t, :] = self.y
 
         return self.h_1t, self.y_1t
+
+    def set_device(self, device="cuda"):
+        """Set the device to allocate tensors to.
+
+        Parameters
+        ----------
+        device : str, optional (default: 'cuda')
+            The device to which tensors will be allocated (e.g., 'cpu', 'cuda').
+
+        Returns
+        -------
+        None
+        """
+        self.device = device
+        self.to(device)
+        self.task.set_device(device)

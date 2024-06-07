@@ -91,7 +91,7 @@ class Trainer:
         self.path = path
         self.device = device
 
-        self.model.to(self.device)
+        self.model.set_device(self.device)
 
         self.optimizer = optim.Adam(
             self.model.parameters(), lr=self.lr, weight_decay=self.weight_decay

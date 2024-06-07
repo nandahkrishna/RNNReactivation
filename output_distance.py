@@ -27,8 +27,7 @@ for expt_config in expt_configs:
         print(f"Skipped: {expt_config}.")
         continue
 
-    model.device = args.device
-    model.to(args.device)
+    model.set_device(args.device)
     model.eval()
 
     task = model.task

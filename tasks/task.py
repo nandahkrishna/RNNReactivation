@@ -20,6 +20,9 @@ class Task(abc.ABC):
 
     compute_metrics(outputs, targets, aux)
         Compute evaluation metrics for the task.
+
+    set_device(device)
+        Set the device to allocate tensors to.
     """
 
     @abc.abstractmethod
@@ -41,3 +44,7 @@ class Task(abc.ABC):
     @abc.abstractmethod
     def compute_metrics(self, outputs, targets, aux):
         """Compute evaluation metrics for the task."""
+
+    def set_device(self, device):
+        """Set the device to allocate tensors to."""
+        self.device = device

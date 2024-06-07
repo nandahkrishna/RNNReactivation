@@ -48,6 +48,9 @@ class HeadDirection(Task):
 
     compute_metrics(outputs, targets, aux=None)
         Compute evaluation metrics for the task.
+
+    set_device(device='cuda')
+        Set the device to allocate tensors to.
     """
 
     def __init__(
@@ -292,6 +295,22 @@ class HeadDirection(Task):
 
         return loss, metric
 
+    def set_device(self, device="cuda"):
+        """Set the device to allocate tensors to.
+
+        Parameters
+        ----------
+        device : str, optional (default: 'cuda')
+            The device to which tensors will be allocated (e.g., 'cpu', 'cuda').
+
+        Returns
+        -------
+        None
+        """
+        self.device = device
+        if self.use_hd_cells:
+            self.hd_cells.set_device(device)
+
 
 class HeadDirectionCells:
     """Simulated head direction cells.
@@ -319,6 +338,9 @@ class HeadDirectionCells:
 
     decode_hd(activation, k=3)
         Decode the head direction in radians from head direction cell activations.
+
+    set_device(device)
+        Set the device to allocate tensors to.
     """
 
     def __init__(
@@ -386,6 +408,22 @@ class HeadDirectionCells:
         pred_sin = np.sin(pred_hd).mean(axis=-1)
         pred_hd = np.arctan2(pred_sin, pred_cos)
         return torch.from_numpy(pred_hd).unsqueeze(-1).float().to(self.device)
+
+    def set_device(self, device="cuda"):
+        """Set the device to allocate tensors to.
+
+        Parameters
+        ----------
+        device : str, optional (default: 'cuda')
+            The device to which tensors will be allocated (e.g., 'cpu', 'cuda').
+
+        Returns
+        -------
+        None
+        """
+        self.device = device
+        self.us.to(device)
+        self.vs.to(device)
 
 
 def von_mises(theta, mu, sigma, norm=None):

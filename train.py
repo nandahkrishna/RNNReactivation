@@ -95,7 +95,7 @@ elif args.rnn.model == "gru":
 else:
     raise NotImplementedError("unknown model.")
 
-model.to(args.device)
+model.set_device(args.device)
 model_trainer = trainer.Trainer(
     model=model,
     train_data=train_data_generator,

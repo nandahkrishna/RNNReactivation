@@ -64,6 +64,9 @@ class SpatialNavigation(Task):
 
     compute_metrics(outputs, targets, aux=None)
         Compute evaluation metrics for the task.
+
+    set_device(device='cuda')
+        Set the device to allocate tensors to.
     """
 
     def __init__(
@@ -431,6 +434,22 @@ class SpatialNavigation(Task):
 
         return loss, metric
 
+    def set_device(self, device="cuda"):
+        """Set the device to allocate tensors to.
+
+        Parameters
+        ----------
+        device : str, optional (default: 'cuda')
+            The device to which tensors will be allocated (e.g., 'cpu', 'cuda').
+
+        Returns
+        -------
+        None
+        """
+        self.device = device
+        if self.use_place_cells:
+            self.place_cells.set_device(device)
+
 
 class PlaceCells:
     """Simulated place cells.
@@ -464,6 +483,9 @@ class PlaceCells:
 
     decode_pos(activation, k=3)
         Decode position from place cell activations.
+
+    set_device(device)
+        Set the device to allocate tensors to.
     """
 
     def __init__(
@@ -560,3 +582,18 @@ class PlaceCells:
         idxs = torch.topk(activation.cpu(), k=k)[1].detach().numpy()
         pred_pos = np.mean(np.take(self.us.cpu().detach().numpy(), idxs, axis=0), axis=-2)
         return torch.from_numpy(pred_pos).float().to(self.device)
+
+    def set_device(self, device="cuda"):
+        """Set the device to allocate tensors to.
+
+        Parameters
+        ----------
+        device : str, optional (default: 'cuda')
+            The device to which tensors will be allocated (e.g., 'cpu', 'cuda').
+
+        Returns
+        -------
+        None
+        """
+        self.device = device
+        self.us.to(device)
