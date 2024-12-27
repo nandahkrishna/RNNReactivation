@@ -1,0 +1,86 @@
+cff-version: 1.2.0
+title: >-
+  Sufficient conditions for offline reactivation in
+  recurrent neural networks
+message: >-
+  If this code was useful to you, please consider citing our
+  work.
+type: software
+authors:
+  - family-names: Krishna
+    given-names: Nanda H
+    orcid: "https://orcid.org/0000-0001-8036-2789"
+  - family-names: Bredenberg
+    given-names: Colin
+    orcid: "https://orcid.org/0000-0002-9749-9228"
+  - family-names: Levenstein
+    given-names: Daniel
+    orcid: "https://orcid.org/0000-0002-5507-9145"
+  - family-names: Richards
+    given-names: Blake Aaron
+    orcid: "https://orcid.org/0000-0001-9662-2151"
+  - family-names: Lajoie
+    given-names: Guillaume
+    orcid: "https://orcid.org/0000-0003-2730-7291"
+identifiers:
+  - type: url
+    value: "https://openreview.net/forum?id=RVrINT6MT7"
+    description: Paper
+repository-code: "https://github.com/nandahkrishna/RNNReactivation"
+abstract: >-
+  During periods of quiescence, such as sleep, neural
+  activity in many brain circuits resembles that observed
+  during periods of task engagement. However, the precise
+  conditions under which task-optimized networks can
+  autonomously reactivate the same network states
+  responsible for online behavior is poorly understood. In
+  this study, we develop a mathematical framework that
+  outlines sufficient conditions for the emergence of neural
+  reactivation in circuits that encode features of smoothly
+  varying stimuli. We demonstrate mathematically that noisy
+  recurrent networks optimized to track environmental state
+  variables using change-based sensory information naturally
+  develop denoising dynamics, which, in the absence of
+  input, cause the network to revisit state configurations
+  observed during periods of online activity. We validate
+  our findings using numerical experiments on two canonical
+  neuroscience tasks: spatial position estimation based on
+  self-motion cues, and head direction estimation based on
+  angular velocity cues. Overall, our work provides
+  theoretical support for modeling offline reactivation as
+  an emergent consequence of task optimization in noisy
+  neural circuits.
+keywords:
+  - computational neuroscience
+  - offline reactivation
+  - replay
+  - recurrent neural networks
+  - path integration
+  - noise
+license: BSD-3-Clause
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: Krishna
+      given-names: Nanda H
+      orcid: "https://orcid.org/0000-0001-8036-2789"
+    - family-names: Bredenberg
+      given-names: Colin
+      orcid: "https://orcid.org/0000-0002-9749-9228"
+    - family-names: Levenstein
+      given-names: Daniel
+      orcid: "https://orcid.org/0000-0002-5507-9145"
+    - family-names: Richards
+      given-names: Blake Aaron
+      orcid: "https://orcid.org/0000-0001-9662-2151"
+    - family-names: Lajoie
+      given-names: Guillaume
+      orcid: "https://orcid.org/0000-0003-2730-7291"
+  title: >-
+    Sufficient conditions for offline reactivation in
+    recurrent neural networks
+  collection-title: >-
+    The Twelfth International Conference on Learning
+    Representations
+  year: 2024
+  url: "https://openreview.net/forum?id=RVrINT6MT7"
