@@ -3,7 +3,7 @@
 :page_facing_up: [PDF](https://arxiv.org/pdf/2505.17003)
 :globe_with_meridians: [arXiv](https://arxiv.org/abs/2505.17003)
 :ballot_box_with_check: [OpenReview](https://openreview.net/forum?id=RVrINT6MT7)
-:bar_chart: [Poster](assets/poster.pdf)
+:bar_chart: [Poster](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/nandahkrishna/RNNReactivation/master/assets/poster.pdf)
 :movie_camera: [Presentation](https://iclr.cc/virtual/2024/poster/18641)
 
 This repository contains code to reproduce experiments and figures from the paper ["Sufficient conditions for offline reactivation in recurrent neural networks"](https://arxiv.org/abs/2505.17003) published at [ICLR 2024](https://iclr.cc/Conferences/2024).
