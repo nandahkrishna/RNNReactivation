@@ -1,11 +1,12 @@
 # Modeling Offline Reactivation or Replay in RNNs
 
-:globe_with_meridians: [OpenReview](https://openreview.net/forum?id=RVrINT6MT7)
-:page_facing_up: [PDF](https://openreview.net/pdf?id=RVrINT6MT7)
+:page_facing_up: [PDF](https://arxiv.org/pdf/2505.17003)
+:globe_with_meridians: [arXiv](https://arxiv.org/abs/2505.17003)
+:ballot_box_with_check: [OpenReview](https://openreview.net/forum?id=RVrINT6MT7)
 :bar_chart: [Poster](https://iclr.cc/media/PosterPDFs/ICLR%202024/18641.png?t=1714898018.805508)
 :movie_camera: [Presentation](https://iclr.cc/virtual/2024/poster/18641)
 
-This repository contains code to reproduce experiments and figures from the paper ["Sufficient conditions for offline reactivation in recurrent neural networks"](https://iclr.cc/virtual/2024/poster/18641) published at [ICLR 2024](https://iclr.cc/Conferences/2024).
+This repository contains code to reproduce experiments and figures from the paper ["Sufficient conditions for offline reactivation in recurrent neural networks"](https://arxiv.org/abs/2505.17003) published at [ICLR 2024](https://iclr.cc/Conferences/2024).
 
 ## Abstract
 
@@ -16,6 +17,7 @@ During periods of quiescence, such as sleep, neural activity in many brain circu
 ## Setup
 
 Create a Python 3.10 virtual environment, and run the following command:
+
 ```zsh
 pip install -r requirements.txt
 ```
@@ -23,21 +25,25 @@ pip install -r requirements.txt
 ## Experiments
 
 To train a model for a specific configuration, you must run `train.py` with the right options:
+
 ```zsh
 python train.py config=CONFIG_NAME seed=SEED [...]
 ```
 
 For example, to train a noisy vanilla RNN on the unbiased spatial navigation task, you may run:
+
 ```zsh
 python train.py config=spatial_navigation/noisy_unbiased seed=0
 ```
 
 You may change the seed and any other hyperparameters or configuration variables either in the `.yml` files in [`configs/train`](/configs/train/), or pass them as command-line arguments. For example:
+
 ```zsh
 python train.py config=spatial_navigation/noisy_unbiased seed=2 rnn.sigma2_rec=0.0003 trainer.n_epochs=1000 task.place_cells_num=256
 ```
 
 After training models with different configurations and seeds, you may run the analysis scripts. Default arguments for these scripts are specified in the `.yml` files in [`configs/analysis`](/configs/analysis/). You may edit these configuration files or override default values using command-line arguments. For example, for models trained with seed 0 you may run:
+
 ```zsh
 python output_kl.py seed=0
 python output_variance.py seed=0
@@ -52,6 +58,7 @@ You may then use the Jupyter Notebooks in [`notebooks`](/notebooks/) to visualiz
 > While it is possible to reproduce results from the paper overall, in practice the numbers and plots may not match _exactly_ due to differences in hardware, versions of CUDA, etc.
 
 To reproduce experiments from the paper, run the following commands:
+
 ```zsh
 for seed in {0..4}; do
     # Train vanilla RNNs on spatial navigation task
@@ -84,6 +91,7 @@ This codebase is licensed under the BSD 3-Clause License (SPDX: `BSD-3-Clause`).
 ## Citation
 
 If this code was useful to you, please consider citing our work:
+
 ```bibtex
 @inproceedings{krishna2024sufficient,
     title={Sufficient conditions for offline reactivation in recurrent neural networks},
